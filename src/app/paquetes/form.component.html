@@ -1,0 +1,66 @@
+<ul class="alert alert-danger" *ngIf="(errores?.length ?? 0) > 0">
+    <li *ngFor="let err of errores">
+        {{ err }}
+    </li>
+</ul>
+<div class="card bg-dark text-white">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+
+        <form #paqueteForm="ngForm">
+            <div class="form-group row">
+                <label for="pedido" class="col-sm-2 col-form-label col-sm-2">Pedido</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="paquete.pedido" name="pedido" minlength="4" #pedido="ngModel">
+                    <div class="alert alert-danger" *ngIf="pedido.invalid && (pedido.dirty || pedido.touched)">
+                        <div *ngIf="pedido.errors?.['required']">
+                            El pedido es requerido
+                        </div>
+                        <div *ngIf="pedido.errors?.['minlength']">
+                            El pedido debe tener al menos 4 caracteres
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="precio" class="col-sm-2 col-form-label col-sm-2">Precio</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="paquete.precio" name="precio" #precio="ngModel">
+                    <div class="alert alert-danger" *ngIf="precio.invalid && (precio.dirty || precio.touched)">
+                        <div *ngIf="precio.errors?.['required']">
+                            El precio es requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="destino" class="col-sm-2 col-form-label col-sm-2">Destino</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="paquete.destino" name="destino" minlength="4" #destino="ngModel">
+                    <div class="alert alert-danger" *ngIf="destino.invalid && (destino.dirty || destino.touched)">
+                        <div *ngIf="destino.errors?.['required']">
+                            El destino es requerido
+                        </div>
+                        <div *ngIf="destino.errors?.['minlength']">
+                            El destino debe tener al menos 4 caracteres
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!paquete.id else elseBlock" [disabled]="!paqueteForm.form.valid">Crear</button>
+
+                    <ng-template #elseBlock>
+                        <button class="btn btn-primary" role="button" (click)="update()">Editar</button>
+                    </ng-template>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
