@@ -11,50 +11,28 @@
             <div class="form-group row">
                 <label for="pedido" class="col-sm-2 col-form-label col-sm-2">Pedido</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="paquete.pedido" name="pedido" minlength="4" #pedido="ngModel">
-                    <div class="alert alert-danger" *ngIf="pedido.invalid && (pedido.dirty || pedido.touched)">
-                        <div *ngIf="pedido.errors?.['required']">
-                            El pedido es requerido
-                        </div>
-                        <div *ngIf="pedido.errors?.['minlength']">
-                            El pedido debe tener al menos 4 caracteres
-                        </div>
-                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="paquete.pedido" name="pedido">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="precio" class="col-sm-2 col-form-label col-sm-2">Precio</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="paquete.precio" name="precio" #precio="ngModel">
-                    <div class="alert alert-danger" *ngIf="precio.invalid && (precio.dirty || precio.touched)">
-                        <div *ngIf="precio.errors?.['required']">
-                            El precio es requerido
-                        </div>
-                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="paquete.precio" name="precio">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="destino" class="col-sm-2 col-form-label col-sm-2">Destino</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="paquete.destino" name="destino" minlength="4" #destino="ngModel">
-                    <div class="alert alert-danger" *ngIf="destino.invalid && (destino.dirty || destino.touched)">
-                        <div *ngIf="destino.errors?.['required']">
-                            El destino es requerido
-                        </div>
-                        <div *ngIf="destino.errors?.['minlength']">
-                            El destino debe tener al menos 4 caracteres
-                        </div>
-                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="paquete.destino" name="destino">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="fecha" class="col-sm-2 col-form-label col-sm-2">Fecha</label>
                 <div class="col-sm-6">
-                    <input type="date" class="form-control" [(ngModel)]="paquete.fecha" name="fecha" minlength="4" #fecha="ngModel">
-                    <input [matDatepicker]="miDatepicker" class="form-control" [(ngModel)]="paquete.fecha" name="fecha" style="display:inline; width:300px;">
+                    <input [matDatepicker]="miDatepicker" class="form-control" [(ngModel)]="paquete.fecha" name="fecha" style="display:inline; width:300px;" #fecha="ngModel">
                     <mat-datepicker-toggle [for]="miDatepicker"></mat-datepicker-toggle>
                     <mat-datepicker #miDatepicker></mat-datepicker>
 

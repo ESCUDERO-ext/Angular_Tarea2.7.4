@@ -17,7 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+//import { MatNativeDateModule } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 registerLocaleData(localeES, 'es');
 
@@ -36,7 +37,7 @@ registerLocaleData(localeES, 'es');
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDatepickerModule, MatNativeDateModule
+    MatDatepickerModule, MatMomentDateModule
   ],
   providers: [
     PaqueteService,
