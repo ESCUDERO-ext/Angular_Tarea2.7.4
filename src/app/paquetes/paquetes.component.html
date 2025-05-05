@@ -1,44 +1,48 @@
 <div class="card border-primary mb-3">
     <div class="card-header">Paquetes</div>
-        <div class="card-body text-primary">
-            <h5 class="card-title">Listado de Paquetes</h5>
+    <div class="card-body text-primary">
+        <h5 class="card-title">Listado de Paquetes</h5>
 
-            <div class="my-2 text-left">
-                <button class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/paquetes/form']">Crear Paquete</button>
-            </div>
-
-            <div *ngIf="paquetes?.length === 0" class="alert alert-info">
-                ¡No hay paquetes disponibles en la base de datos!
-
-            </div>
-
-            <table class="table table-bordered table-striped" *ngIf="paquetes?.length && paquetes.length > 0">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Fecha</th>
-                        <th>Destino</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let paquete of paquetes">
-                        <td>{{paquete.id}}</td>
-                        <td>{{paquete.pedido}}</td>
-                        <td>{{paquete.precio}}</td>
-                        <td>{{paquete.fecha | date:"EEEE dd, MMMM yyyy"}}</td>
-                        <td>{{paquete.destino}}</td>
-                        <td>
-                            <button type="button" name="editar" [routerLink]="['/paquetes/form', paquete.id]" class="btn btn-primary btn-sm">Editar</button>
-                        </td>
-                        <td>
-                            <button type="button" name="eliminar" (click)="delete(paquete)" class="btn btn-danger btn-sm">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="my-2 text-left">
+            <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/paquetes/form']">Crear
+                Paquete</button>
         </div>
+
+        <div *ngIf="paquetes?.length === 0" class="alert alert-info">
+            ¡No hay paquetes disponibles en la base de datos!
+
+        </div>
+
+        <table class="table table-bordered table-striped" *ngIf="paquetes?.length && paquetes.length > 0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Fecha</th>
+                    <th>Destino</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let paquete of paquetes">
+                    <td>{{paquete.id}}</td>
+                    <td>{{paquete.pedido}}</td>
+                    <td>{{paquete.precio}}</td>
+                    <td>{{paquete.fecha | date:"EEEE dd, MMMM yyyy"}}</td>
+                    <td>{{paquete.destino}}</td>
+                    <td>
+                        <button type="button" name="editar" [routerLink]="['/paquetes/form', paquete.id]"
+                            class="btn btn-primary btn-sm">Editar</button>
+                    </td>
+                    <td>
+                        <button type="button" name="eliminar" (click)="delete(paquete)"
+                            class="btn btn-danger btn-sm">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
+    </div>
 </div>

@@ -17,18 +17,17 @@ export class PaqueteService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getPaquetes(): Observable<Paquete[]> {
+  getPaquetes(page: number): Observable<any> {
     //return of(PAQUETES);
-    return this.http.get<Paquete[]>(this.urlEndPoint).pipe(
-      tap((response: Paquete[]) => {
+    return this.http.get<Paquete[]>(this.urlEndPoint + '/page/' + page).pipe(
+      tap( (response: any) => {
         console.log('PaqueteService: tap 1');
-        response.forEach((paquete: Paquete) => {
+        (response.content as Paquete[]).forEach(paquete => {
           console.log(paquete.pedido);
         });
       }),
-      map(response => {
-        let paquetes = response as Paquete[];
-        return paquetes.map(paquete => {
+      map( (response: any) => {
+        (response.content as Paquete[]).map(paquete => {
           paquete.pedido = paquete.pedido?.toUpperCase();
           
           let datePipe = new DatePipe('es');
@@ -37,12 +36,12 @@ export class PaqueteService {
 
           return paquete;
         });
-
+        return response;
       }
       ),
       tap(response => {
         console.log('PaqueteService: tap 2');
-        response.forEach( paquete=> {
+        (response.content as Paquete[]).forEach( paquete=> {
           console.log(paquete.pedido);
         })
       })

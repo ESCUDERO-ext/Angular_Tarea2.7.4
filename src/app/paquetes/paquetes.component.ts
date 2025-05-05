@@ -3,6 +3,7 @@ import { Paquete } from './paquetes';
 import { PaqueteService } from './paquete.service';
 import { tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-paquetes',
@@ -13,18 +14,33 @@ import Swal from 'sweetalert2';
 export class PaquetesComponent implements OnInit {
 
   paquetes: Paquete[] = [];
+  paginador: any;
 
-  constructor(private paqueteService: PaqueteService) { }
+  constructor(private paqueteService: PaqueteService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.paqueteService.getPaquetes().pipe(
-      tap((paquetes: Paquete[]) => {
-        console.log('PaquetesComponent: tap 3');
-        paquetes.forEach((paquete: Paquete) => {
-          console.log(paquete.pedido);
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = +(params.get('page') ?? 0);
+
+      if (!page) {
+        page = 0; // Si no hay página, establece la página inicial en 0
+      }
+
+      this.paqueteService.getPaquetes(page)
+        .pipe(
+          tap(response => {
+            console.log('PaquetesComponent: tap 3');
+            (response.content as Paquete[]).forEach((paquete: Paquete) => {
+              console.log(paquete.pedido);
+            });
+          })
+        ).subscribe(response => {
+          this.paquetes = response.content as Paquete[];
+          this.paginador = response;
         });
-      })
-    ).subscribe(paquetes => this.paquetes = paquetes);
+
+    }
+    );
   }
 
   delete(paquete: Paquete): void {

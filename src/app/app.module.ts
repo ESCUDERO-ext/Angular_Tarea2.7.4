@@ -6,13 +6,18 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
+import { FormComponent } from './paquetes/form.component';
+import { PaginatorComponent } from './paginator/paginator.component';
 import { PaquetesComponent } from './paquetes/paquetes.component';
 import { PaqueteService } from './paquetes/paquete.service';
 import { provideHttpClient } from '@angular/common/http';
-import { FormComponent } from './paquetes/form.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 registerLocaleData(localeES, 'es');
 
@@ -23,12 +28,15 @@ registerLocaleData(localeES, 'es');
     FooterComponent,
     DirectivaComponent,
     PaquetesComponent,
-    FormComponent
+    FormComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule, MatNativeDateModule
   ],
   providers: [
     PaqueteService,
